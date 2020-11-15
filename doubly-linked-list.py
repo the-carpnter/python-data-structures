@@ -45,7 +45,7 @@ class DlinkedList:
             self.head.prev = None
             return x
 
-        if index is None:
+        if index is None or index == len(self)-1:
             itr = self.head
             while itr.next:
                 itr = itr.next
@@ -56,9 +56,11 @@ class DlinkedList:
         count = 0
         itr = self.head
         while itr:
-            if count == index - 1:
-                itr.next = itr.next.next
-                itr.next.next.prev = itr
+            if count == index:
+                itr.prev.next = itr.next
+                itr.next.prev = itr.prev
+                itr = None
+                return
             itr = itr.next
             count += 1
     
@@ -98,7 +100,7 @@ class DlinkedList:
             self.touch(new_node.data)
             return
         
-        if index == len(self) - 1:
+        if index == len(self):
             self.push(new_node.data)
             return
 
@@ -131,4 +133,6 @@ if __name__ == '__main__':
         dl.push(i)
     print(dl)
     dl.insert(9, 100)
+    print(dl)
+    dl.pop(10)
     print(dl)
