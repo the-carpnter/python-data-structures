@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class DlinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def push(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+        itr.next = new_node
+        new_node.prev = itr
+        
+
+    def touch(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        new_node.next = self.head
+        self.head.prev = new_node
+        self.head = new_node
+        
+
+    def __str__(self):
+        if self.head is None:
+            return 'List is Empty!'
+        itr = self.head
+        k = 'None -- ' 
+        while itr:
+            k += '[' + str(itr.data) + ']' + ' -- '
+            itr = itr.next
+        return k + 'None'
+
+if __name__ == '__main__':
+    dl = DlinkedList()
+    for i in range(10):
+        dl.touch(i)
+    dl.touch(10)
+    dl.push(-1)
+    print(dl)
