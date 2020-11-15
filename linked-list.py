@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, data=None, next = None):
+    def __init__(self, data = None, next = None):
         self.data = data
         self.next = next
 
@@ -40,6 +40,9 @@ class Linkedlist:
             return
         if index is None:
             itr = self.head
+            if itr.next is None:
+                self.head = None
+                return
             while itr.next.next:
                 itr = itr.next
             x = itr.next.data
