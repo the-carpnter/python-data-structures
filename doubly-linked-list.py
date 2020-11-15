@@ -13,6 +13,7 @@ class DlinkedList:
         if self.head is None:
             self.head = new_node
             return
+        
         itr = self.head
         while itr.next:
             itr = itr.next
@@ -28,8 +29,31 @@ class DlinkedList:
         new_node.next = self.head
         self.head.prev = new_node
         self.head = new_node
-        
+    
+    def pop(self, index = None):
+        if index == 0:
+            x = self.head.data
+            self.head = self.head.next
+            self.head.prev = None
+            return x
 
+        if index is None:
+            itr = self.head
+            while itr.next:
+                itr = itr.next
+            itr.prev.next = None
+            itr.prev = None
+            return
+        
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                itr.next = itr.next.next
+                itr.next.next.prev = itr
+            itr = itr.next
+            count += 1
+        
     def __str__(self):
         if self.head is None:
             return 'List is Empty!'
@@ -43,7 +67,7 @@ class DlinkedList:
 if __name__ == '__main__':
     dl = DlinkedList()
     for i in range(10):
-        dl.touch(i)
-    dl.touch(10)
-    dl.push(-1)
+        dl.push(i)
+    print(dl)
+    dl.pop(5)
     print(dl)
