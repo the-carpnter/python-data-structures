@@ -8,6 +8,14 @@ class DlinkedList:
     def __init__(self):
         self.head = None
     
+    def __len__(self):
+        count = 0
+        itr = self.head
+        while itr:
+            itr = itr.next
+            count += 1
+        return count
+    
     def push(self, data):
         new_node = Node(data)
         if self.head is None:
@@ -83,7 +91,30 @@ class DlinkedList:
                 return
             
             itr = itr.next
+    
+    def insert(self, index, data):
+        new_node = Node(data)
+        if index == 0:
+            self.touch(new_node.data)
+            return
         
+        if index == len(self) - 1:
+            self.push(new_node.data)
+            return
+
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                new_node.next = itr.next
+                new_node.prev = itr
+                itr.next.prev = new_node
+                itr.next = new_node
+                itr = None
+                return
+            itr = itr.next
+            count += 1
+             
     def __str__(self):
         if self.head is None:
             return 'List is Empty!'
@@ -96,7 +127,8 @@ class DlinkedList:
 
 if __name__ == '__main__':
     dl = DlinkedList()
-    dl.push(5)
+    for i in range(10):
+        dl.push(i)
     print(dl)
-    dl.delete(5)
+    dl.insert(9, 100)
     print(dl)
