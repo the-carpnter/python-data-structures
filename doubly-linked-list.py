@@ -57,6 +57,11 @@ class DlinkedList:
     def delete(self, data):
         itr = self.head
         while itr:
+            if itr.data == data and self.head.next is None:
+                itr = None
+                self.head = None
+                return
+
             if itr.data == data and itr is self.head:
                 self.head = itr.next
                 itr.next.prev = None
@@ -91,8 +96,7 @@ class DlinkedList:
 
 if __name__ == '__main__':
     dl = DlinkedList()
-    for i in range(10):
-        dl.push(i)
+    dl.push(5)
     print(dl)
     dl.delete(5)
     print(dl)
