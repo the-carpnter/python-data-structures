@@ -38,7 +38,7 @@ class Linkedlist:
     def pop(self, index=None):
         if self.head is None:
             return
-        if index == None:
+        if index is None:
             itr = self.head
             while itr.next.next:
                 itr = itr.next
