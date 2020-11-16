@@ -59,6 +59,16 @@ class Linkedlist:
                 return x
             itr = itr.next
             count += 1
+    
+    def reverse_iterative(self):
+        prev = None
+        itr = self.head
+        while itr:
+            nxt = itr.next
+            itr.next = prev
+            prev = itr
+            itr = nxt
+        self.head = prev
         
     def __str__(self):
         if self.head is None:
@@ -80,6 +90,7 @@ if __name__ == '__main__':
     ll.pop()
     ll.pop()
     print(ll)
-    print(len(ll))
+    ll.reverse_iterative()
+    print(ll)
 
 
